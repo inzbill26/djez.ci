@@ -7,7 +7,7 @@
 {% block body %}
 
 <div class="container titre-rubrique light-gray">
-	{% trans %}add_details.publish_date{% endtrans %} {{ annonce.dateCreation|date('Y-m-d H:i:s')  }}
+	{% trans %}add_details.publish_date{% endtrans %} {{ annonce.dateCreation|date('d-m-Y H:i:s')  }}
 </div>
 
 <form id="details-form" name="details-form" action="{{ path('djez_accueil_pagination_homepage', {'page':page} )}}" method="GET" >
@@ -60,9 +60,9 @@
 							{{ annonce.localisation }}
 						{% endif %}
 					</p>
-					<div> <p><span style="color:#F60">{% trans %}home_page.add.description{% endtrans %}</span> </p> :
+					<div> <p><span style="color:#F60">{% trans %}home_page.add.description{% endtrans %}</span> : </p>
 						<span class="annonce-free-description">
-								{{ annonce.descriptionAnnonce }}
+								{{ annonce.descriptionAnnonce | wordwrap(95) }}
 						</span>
 					</div>
 				</div>
