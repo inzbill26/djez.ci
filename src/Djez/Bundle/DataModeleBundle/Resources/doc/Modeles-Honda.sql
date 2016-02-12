@@ -1,0 +1,10 @@
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Accord');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Accord Tourer');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Civic');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Civic 2015');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Civic Tourer');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Civic Tourer 2015');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Civic Type R');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Cr-V');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Cr-V 2015');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(20,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Jazz');;

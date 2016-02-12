@@ -1,0 +1,3 @@
+ insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500 Abarth');;
+ insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500c Abarth');;
+ insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Punto Evo Abarth');;

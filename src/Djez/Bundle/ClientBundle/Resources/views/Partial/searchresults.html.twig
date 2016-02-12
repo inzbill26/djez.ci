@@ -1,0 +1,36 @@
+<form id="details-form" name="details-form" action="{{ path('djez_details_annonce') }}" method="POST" >
+
+  <div class="container-annonce">
+
+    <input type="hidden" name="annonceId" id="annonceId">
+    <input type="hidden" value="{{ pagination.page }}" name="pageNumber">
+    <input type="hidden" value="{{ selectedTab }}" name="selectedTab">
+
+  {% for annonce in annonces %}
+
+
+      <div title="{% trans %} annonce.details {%endtrans%}" class="annonce" onclick="annonceDetails({{ annonce.idAnnonce }})">
+        <img class="image_annonce" src="{{ asset(annonce.accroche) }}">
+        <div class="description_annonce">
+          <p>{% trans %} home_page.add.title {% endtrans %} : {{ annonce.titreAnnonce }}</p>
+          <p>{% trans %} home_page.add.price {% endtrans %} : {{ annonce.prixObjet }} {{ annonce.devise }}
+            {% if annonce.unitePrix %}
+              / {{ annonce.unitePrix }}
+            {% endif %}
+          </p>
+          <p>
+            {% trans %} home_page.add.creation_date {% endtrans %} : {{ annonce.dateCreation|date('d-m-Y H:i:s')  }}
+          </p>
+          <p>
+            {% trans %} home_page.add.description {% endtrans %} :
+          </p>
+          <span class="annonce-free-description"> {{ annonce.descriptionAnnonce | truncate(160) }} </span>
+        </div>
+      </div>
+
+
+  {% endfor %}
+
+  </div>
+
+</form>

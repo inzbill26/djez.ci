@@ -1,0 +1,543 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="file.ext">
+		<body>
+			<trans-unit id="1">
+				<source>home_page.title</source>
+				<target>Accueil</target>
+			</trans-unit>
+
+			<trans-unit id="2">
+				<source>user.connexion</source>
+				<target>Connexion</target>
+			</trans-unit>
+
+			<trans-unit id="3">
+				<source>user.account</source>
+				<target>Mon compte</target>
+			</trans-unit>
+
+			<trans-unit id="4">
+				<source>user.adds</source>
+				<target>Mes annonces</target>
+			</trans-unit>
+
+			<trans-unit id="5">
+				<source>user.mails</source>
+				<target>Messages</target>
+			</trans-unit>
+
+			<trans-unit id="6">
+				<source>user.disconnect</source>
+				<target>Deconexion</target>
+			</trans-unit>
+
+			<trans-unit id="7">
+				<source>user_credential.forgotten</source>
+				<target>Identifiants oublié ?</target>
+			</trans-unit>
+
+			<trans-unit id="8">
+				<source>user_account.creation</source>
+				<target>Créer un compte</target>
+			</trans-unit>
+
+			<trans-unit id="9">
+				<source>navigation_bar.sell</source>
+				<target>Je vends</target>
+			</trans-unit>
+
+			<trans-unit id="10">
+				<source>navigation_bar.buy</source>
+				<target>J'achete</target>
+			</trans-unit>
+
+			<trans-unit id="11">
+				<source>navigation_bar.mission</source>
+				<target>Je confie une mission</target>
+			</trans-unit>
+
+			<trans-unit id="12">
+				<source>navigation_bar.shops</source>
+				<target>Boutique</target>
+			</trans-unit>
+
+			<trans-unit id="13">
+				<source>navigation_bar.help</source>
+				<target>Aide</target>
+			</trans-unit>
+
+			<trans-unit id="14">
+				<source>quick_search.category</source>
+				<target>Categorie</target>
+			</trans-unit>
+
+			<trans-unit id="15">
+				<source>quick_search.min_price</source>
+				<target>Prix min</target>
+			</trans-unit>
+
+			<trans-unit id="16">
+				<source>quick_search.max_price</source>
+				<target>Prix max</target>
+			</trans-unit>
+
+			<trans-unit id="17">
+				<source>quick_search.search_button</source>
+				<target>Recherche</target>
+			</trans-unit>
+
+			<trans-unit id="18">
+				<source>home_page.caption</source>
+				<target>Annonces du jour</target>
+			</trans-unit>
+
+			<trans-unit id="19">
+				<source>home_page.add.title</source>
+				<target>Titre</target>
+			</trans-unit>
+
+			<trans-unit id="20">
+				<source>home_page.add.price</source>
+				<target>Prix</target>
+			</trans-unit>
+
+			<trans-unit id="21">
+				<source>home_page.add.contact</source>
+				<target>Contact</target>
+			</trans-unit>
+
+			<trans-unit id="22">
+				<source>home_page.add.description</source>
+				<target>Description</target>
+			</trans-unit>
+
+			<trans-unit id="23">
+				<source>home_page.add.creation_date</source>
+				<target>Mis en ligne le </target>
+			</trans-unit>
+
+			<trans-unit id="24">
+				<source>publish_adds_page.caption</source>
+				<target>Publier une annonce</target>
+			</trans-unit>
+
+			<trans-unit id="25">
+				<source>publish_form.add_title</source>
+				<target>Titre</target>
+			</trans-unit>
+
+			<trans-unit id="26">
+				<source>publish_form.add_title_placeholder</source>
+				<target>Titre de l'annonce</target>
+			</trans-unit>
+
+			<trans-unit id="27">
+				<source>publish_form.add_categories</source>
+				<target>Categorie</target>
+			</trans-unit>
+
+			<trans-unit id="28">
+				<source>publish_form.car_brand</source>
+				<target>Marque</target>
+			</trans-unit>
+
+			<trans-unit id="29">
+				<source>publish_form.legende_identite_section</source>
+				<target>Qui êtes vous ?</target>
+			</trans-unit>
+
+			<trans-unit id="30">
+				<source>publish_form.car_modele</source>
+				<target>Modele</target>
+			</trans-unit>
+
+			<trans-unit id="31">
+				<source>publish_form.car_transmission</source>
+				<target>Transmission</target>
+			</trans-unit>
+
+			<trans-unit id="32">
+				<source>publish_form.car_transmission_manuelle</source>
+				<target>Manuelle</target>
+			</trans-unit>
+
+
+			<trans-unit id="33">
+				<source>publish_form.car_transmission_auto</source>
+				<target>Automatique</target>
+			</trans-unit>
+
+			<trans-unit id="34">
+				<source>publish_form.car_annee</source>
+				<target>Année</target>
+			</trans-unit>
+
+			<trans-unit id="35">
+				<source>publish_form.car_modele</source>
+				<target>Modele</target>
+			</trans-unit>
+
+
+			<trans-unit id="36">
+				<source>publish_form.car_kilometrage</source>
+				<target>Kilometrage</target>
+			</trans-unit>
+
+
+			<trans-unit id="37">
+				<source>publish_form.prix</source>
+				<target>Prix</target>
+			</trans-unit>
+
+
+			<trans-unit id="38">
+				<source>publish_form.devise</source>
+				<target>Devise</target>
+			</trans-unit>
+
+			<trans-unit id="39">
+				<source>publish_form.cfa</source>
+				<target>FCFA</target>
+			</trans-unit>
+
+			<trans-unit id="40">
+				<source>publish_form.eur</source>
+				<target>EUR</target>
+			</trans-unit>
+
+			<trans-unit id="41">
+				<source>publish_form.negociable</source>
+				<target>Negociable</target>
+			</trans-unit>
+
+			<trans-unit id="42">
+				<source>publish_form.description</source>
+				<target>Description</target>
+			</trans-unit>
+
+			<trans-unit id="43">
+				<source>publish_form.photo_1</source>
+				<target>Photos 1</target>
+			</trans-unit>
+
+			<trans-unit id="44">
+				<source>publish_form.annonceur_particulier</source>
+				<target>Particulier</target>
+			</trans-unit>
+
+			<trans-unit id="45">
+				<source>publish_form.annonceur_professionel</source>
+				<target>Professionel</target>
+			</trans-unit>
+
+			<trans-unit id="46">
+				<source>publish_form.annonceur_email</source>
+				<target>Email</target>
+			</trans-unit>
+
+			<trans-unit id="47">
+				<source>publish_form.annonceur_telephone</source>
+				<target>Téléphone</target>
+			</trans-unit>
+
+
+			<trans-unit id="48">
+				<source>publish_form.car_power</source>
+				<target>Puissance</target>
+			</trans-unit>
+
+			<trans-unit id="49">
+				<source>publish_form.car_energy</source>
+				<target>Carburant</target>
+			</trans-unit>
+
+			<trans-unit id="50">
+				<source>publish_form.car_energy_essence</source>
+				<target>Essence</target>
+			</trans-unit>
+
+			<trans-unit id="51">
+				<source>publish_form.car_energy_diesel</source>
+				<target>Diesel</target>
+			</trans-unit>
+
+			<trans-unit id="52">
+				<source>publish_form.car_energy_gpl</source>
+				<target>Gpl</target>
+			</trans-unit>
+
+			<trans-unit id="53">
+				<source>publish_form.car_energy_electrique</source>
+				<target>Electrique</target>
+			</trans-unit>
+
+			<trans-unit id="54">
+				<source>publish.page</source>
+				<target>Vendre</target>
+			</trans-unit>
+
+			<trans-unit id="55">
+				<source>publish_form_description.remaining_word</source>
+				<target>caracteres restant</target>
+			</trans-unit>
+
+			<trans-unit id="56">
+				<source>add_details.publish_date</source>
+				<target>Annonces deposee le </target>
+			</trans-unit>
+
+			<trans-unit id="57">
+				<source>add_detail.buy</source>
+				<target>Acheter</target>
+			</trans-unit>
+
+			<trans-unit id="58">
+				<source>add_detail.proposal</source>
+				<target>Faire une offre</target>
+			</trans-unit>
+
+			<trans-unit id="59">
+				<source>add_detail.back</source>
+				<target>Retour</target>
+			</trans-unit>
+
+			<trans-unit id="60">
+				<source>add_detail.proposal_window_tips</source>
+				<target>Les champs obligatires sont marqués d'une étoile (*).</target>
+			</trans-unit>
+
+			<trans-unit id="61">
+				<source>add_detail.proposal_window_identifier</source>
+				<target>Votre Identifiant</target>
+			</trans-unit>
+
+			<trans-unit id="62">
+				<source>add_detail.proposal_window_email</source>
+				<target>Votre Email</target>
+			</trans-unit>
+
+			<trans-unit id="63">
+				<source>add_detail.proposal_window_proposal</source>
+				<target>Montant proposé</target>
+			</trans-unit>
+
+			<trans-unit id="64">
+				<source>add_detail.proposal_window_message</source>
+				<target>Message</target>
+			</trans-unit>
+
+			<trans-unit id="65">
+				<source>add_details.buy</source>
+				<target>Acheter</target>
+			</trans-unit>
+
+			<trans-unit id="66">
+				<source>search_adds_page.caption</source>
+				<target>Recherche avancée</target>
+			</trans-unit>
+
+			<trans-unit id="67">
+				<source>search.page</source>
+				<target>Acheter</target>
+			</trans-unit>
+
+			<trans-unit id="68">
+				<source>result_page.title</source>
+				<target>Resultats</target>
+			</trans-unit>
+
+			<trans-unit id="69">
+				<source>result_page.caption</source>
+				<target>%nombreAnnonce% annonces correspondent a vos critères de recherche</target>
+			</trans-unit>
+
+			<trans-unit id="70">
+				<source>search_form.keyword</source>
+				<target>Mot clé</target>
+			</trans-unit>
+
+			<trans-unit id="71">
+				<source>error.required_msg</source>
+				<target>Champ obligatoire</target>
+			</trans-unit>
+
+			<trans-unit id="72">
+				<source>error.invalid_msg</source>
+				<target>Donnée invalide</target>
+			</trans-unit>
+
+			<trans-unit id="73">
+				<source>both_type.annonceur</source>
+				<target>Indifferent</target>
+			</trans-unit>
+
+			<trans-unit id="74">
+				<source>button.annuler</source>
+				<target>Annuler</target>
+			</trans-unit>
+
+			<trans-unit id="75">
+				<source>button.publier</source>
+				<target>Publier</target>
+			</trans-unit>
+
+			<trans-unit id="76">
+				<source>annee.min</source>
+				<target>Année min</target>
+			</trans-unit>
+
+			<trans-unit id="77">
+				<source>annee.max</source>
+				<target>Année max</target>
+			</trans-unit>
+
+
+			<trans-unit id="78">
+				<source>power.min</source>
+				<target>Puissance min</target>
+			</trans-unit>
+
+			<trans-unit id="79">
+				<source>power.max</source>
+				<target>Puissance max</target>
+			</trans-unit>
+
+			<trans-unit id="80">
+				<source>publish_form.car_energy_indifferent</source>
+				<target>Indifferent</target>
+			</trans-unit>
+
+			<trans-unit id="81">
+				<source>kilometrage.min</source>
+				<target>Kilometrage min</target>
+			</trans-unit>
+
+			<trans-unit id="82">
+				<source>kilometrage.max</source>
+				<target>Kilometrage max</target>
+			</trans-unit>
+
+			<trans-unit id="83">
+				<source>kilometrage.max</source>
+				<target>Kilometrage max</target>
+			</trans-unit>
+
+			<trans-unit id="84">
+				<source>publish_form.photo_2</source>
+				<target>Photos 2</target>
+			</trans-unit>
+
+			<trans-unit id="85">
+				<source>publish_form.photo_3</source>
+				<target>Photos 3</target>
+			</trans-unit>
+
+			<trans-unit id="86">
+				<source>publish_form.photo_4</source>
+				<target>Photos 4</target>
+			</trans-unit>
+
+			<trans-unit id="87">
+				<source>publish_form.photo_5</source>
+				<target>Photos 5</target>
+			</trans-unit>
+
+			<trans-unit id="88">
+				<source>publish_form.accroche</source>
+				<target>Definir comme photo d'accroche</target>
+			</trans-unit>
+
+			<trans-unit id="89">
+				<source>publish_form.localisation</source>
+				<target>Localisation du bien</target>
+			</trans-unit>
+
+			<trans-unit id="90">
+				<source>error.empty_form</source>
+				<target>Le formulaire soumis est vide ou corrompu</target>
+			</trans-unit>
+
+			<trans-unit id="91">
+				<source>error.champs_generique_requis</source>
+				<target>Erreur titre, description, prix, devise, categorie requis</target>
+			</trans-unit>
+
+			<trans-unit id="92">
+				<source>error.champs_vehicule_requis</source>
+				<target>Erreur marque, modele, annee, transmission, puissance, carburant requis</target>
+			</trans-unit>
+
+			<trans-unit id="93">
+				<source>error.champs_annonceur_requis</source>
+				<target>Erreur Type annonceur, email annonceur requis</target>
+			</trans-unit>
+
+			<trans-unit id="94">
+				<source>add.save_success</source>
+				<target>Annonce enregistrer</target>
+			</trans-unit>
+
+			<trans-unit id="95">
+				<source>error.saving_file_on_server_%name%</source>
+				<target>Erreur lors de la sauvegarde du fichier %name%</target>
+			</trans-unit>
+
+			<trans-unit id="96">
+				<source>error.file_corrupted_%name%</source>
+				<target>Erreur fichier corrompu %name%</target>
+			</trans-unit>
+
+			<trans-unit id="97">
+				<source>error.file_transfer_%name%</source>
+				<target>Erreur lors du transfert du fichier %name%</target>
+			</trans-unit>
+
+			<trans-unit id="98">
+				<source>error.file_toobig_%name%</source>
+				<target>Erreur le fichier depasse la taille limite %name%</target>
+			</trans-unit>
+
+			<trans-unit id="99">
+				<source>error.file_content_vs_extention_%name%</source>
+				<target>Erreur le contenu du fichier ne correspond pas son extention %name%</target>
+			</trans-unit>
+
+			<trans-unit id="100">
+				<source>publish_form.delete_photo</source>
+				<target>Supprimer la selection</target>
+			</trans-unit>
+
+			<trans-unit id="101">
+				<source>publish_form.localisation_other</source>
+				<target>AUTRE</target>
+			</trans-unit>
+
+			<trans-unit id="102">
+				<source>publish_form.kilogramme</source>
+				<target>Kilogramme</target>
+			</trans-unit>
+
+			<trans-unit id="103">
+				<source>publish_form.tonne</source>
+				<target>Tonne</target>
+			</trans-unit>
+
+			<trans-unit id="104">
+				<source>publish_form.litre</source>
+				<target>Litre</target>
+			</trans-unit>
+
+			<trans-unit id="105">
+				<source>annonce.details</source>
+				<target>Cliqué ici pour voir les details de cette annonce</target>
+			</trans-unit>
+
+			<trans-unit id="106">
+				<source>home_page.add.localisation</source>
+				<target>Localisation</target>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

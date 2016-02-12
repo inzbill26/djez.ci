@@ -1,0 +1,48 @@
+djez_accueil_homepage:
+    path:    /
+    defaults: { _controller: DjezClientBundle:Accueil:annoncesDuJour, page: 1 }
+
+
+djez_accueil_pagination_homepage:
+    path:    /pagenum={page}
+    defaults: { _controller: DjezClientBundle:Accueil:annoncesDuJour, page: 1 }
+
+djez_devise:
+     pattern: /devise/{devise}
+     defaults: { _controller: DjezClientBundle:Accueil:choixDevise, devise:RIEN }
+
+djez_publier_annonce:
+     pattern: /annonce/publier
+     defaults: { _controller: DjezClientBundle:Publier:publierAnnonce }
+
+#djez_save_images_annonce:
+#     pattern: /annonce/publier/photos
+#     defaults: { _controller: DjezClientBundle:Publier:enregistrerPhotos }
+
+djez_save_annonce:
+     pattern: /annonce/publier/enregistrer
+     defaults: { _controller: DjezClientBundle:Publier:enregistrerAnnonce }
+
+djez_details_annonce:
+     pattern: /annonce/details
+     defaults: { _controller: DjezClientBundle:Details:showDetailsAnnonce }
+
+djez_details_annonce_proposition:
+     pattern: /annonce/details/proposition
+     defaults: { _controller: DjezClientBundle:Details:propositionAnnonce }
+
+djez_recherche_avancee:
+     pattern: /acheter
+     defaults: { _controller: DjezClientBundle:Acheter:showFormulaireRecherche }
+
+djez_valider_recherche_avancee:
+     pattern: /acheter/search
+     defaults: { _controller: DjezClientBundle:Acheter:rechercherAnnonce }
+
+
+# Default route must be the last
+default_route:
+    pattern: /{url}
+    defaults: { _controller: DjezClientBundle:Default:index, url: "index" }
+    requirements:
+        url: ".+"

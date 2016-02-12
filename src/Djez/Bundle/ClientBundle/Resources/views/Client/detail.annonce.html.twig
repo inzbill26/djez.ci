@@ -1,0 +1,239 @@
+{% extends '::djez.base.html.twig' %}
+
+{% block title %}
+{% trans %}publish.page{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container titre-rubrique light-gray">
+	{% trans %}add_details.publish_date{% endtrans %} {{ annonce.dateCreation|date('Y-m-d H:i:s')  }}
+</div>
+
+<form id="details-form" name="details-form" action="{{ path('djez_accueil_pagination_homepage', {'page':page} )}}" method="GET" >
+
+			<div class="container">
+
+			<div class="detail_cont">
+
+				<div class="photo_container">
+
+					<a href="{{ asset(annonce.accroche) }}" data-lightbox="image">
+						<img id="first_plan" class="photo_detail" src="{{ asset(annonce.accroche) }}">
+					</a>
+
+					{% for photo in annonce.photos %}
+
+					  <a href="{{ asset(photo.url) }}" data-lightbox="image"></a>
+
+					{% endfor %}
+
+
+					<div class="photo_thundernails">
+
+						{% for photo in annonce.photos %}
+
+							<img onclick="showInMainPan('{{ asset(photo.url) }}')" onmouseover="thundernailMouseOver(this)" onmouseout="thundernailMouseOut(this)" class="photo_thundernail" src="{{ asset(photo.url) }}">
+
+						{% endfor %}
+
+					</div>
+
+				</div>
+
+				<div class="annonce-description-text-container">
+					<p> <span style="color:#F60">{% trans %}home_page.add.title{% endtrans %}</span> : {{ annonce.titreAnnonce }}</p>
+					<p> <span style="color:#F60">{% trans %}home_page.add.price{% endtrans %}</span> : {{ annonce.prixObjet }} {{ annonce.devise }}
+						{% if annonce.unitePrix %}
+							/ {{ annonce.unitePrix }}
+						{% endif %}
+					</p>
+					<p> <span style="color:#F60">{% trans %}home_page.add.contact{% endtrans %}</span> :
+						{% if annonce.telephoneAnnonceur %}
+							{{ annonce.telephoneAnnonceur }}
+						{% else %}
+							<a href="mailto:{{ annonce.emailAnnonceur }}">{{ annonce.emailAnnonceur }}</a>
+						{% endif %}
+					</p>
+					<p> <span style="color:#F60">{% trans %}home_page.add.localisation{% endtrans %}</span> :
+						{% if annonce.localisation %}
+							{{ annonce.localisation }}
+						{% endif %}
+					</p>
+					<div> <p><span style="color:#F60">{% trans %}home_page.add.description{% endtrans %}</span> </p> :
+						<span class="annonce-free-description">
+								{{ annonce.descriptionAnnonce }}
+						</span>
+					</div>
+				</div>
+			</div>
+
+			</div>
+
+</form>
+
+
+			<div class="container">
+				<div class="navigation_bouton_div">
+					<!--<button id="acheter" onclick="#" class="btn btn-primary navigation_bouton"><span class="fui-check"></span>    {% trans %}add_details.buy{% endtrans %}</button>-->
+					<button id="faire_proposition" onclick="#" class="btn btn-primary navigation_bouton"
+					{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+					disabled >
+					{% endif %}
+						<span class="fui-mail"></span>     {% trans %}add_detail.proposal{% endtrans %}
+					</button>
+					<button id="returner_a_liste" onclick="annonceDetails()" class="btn btn-primary navigation_bouton"><span class="fui-cross"></span>    {% trans %}add_detail.back{% endtrans %}</button>
+				</div>
+
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<div id="dialog-form" title="{% trans %}add_detail.proposal{% endtrans %}">
+					<p class="validateTips">{% trans %}add_detail.proposal_window_tips{% endtrans %}</p>
+					<form id="proposal-form" name="proposal-form" action="{{ path('djez_details_annonce_proposition') }}" method="POST" >
+						<fieldset>
+							<label for="login_prop">{% trans %}add_detail.proposal_window_identifier{% endtrans %}<sup>*</sup></label>
+							<input type="text" required="required" name="login_prop" id="login_prop" value="{{ app.user.username }}" class="text ui-widget-content ui-corner-all" disabled="true">
+							<label for="email_prop">{% trans %}add_detail.proposal_window_email{% endtrans %}<sup>*</sup></label>
+							<input type="email" required="required" name="email_prop" id="email_prop" value="" class="text ui-widget-content ui-corner-all">
+							<label for="proposition">{%trans%}add_detail.proposal_window_proposal{%endtrans%}<sup>*</sup></label>
+							<input type="number" required="required" name="proposition" id="proposition" value="" class="text ui-widget-content ui-corner-all">
+							<label for="description_prop">{%trans%}add_detail.proposal_window_message{%endtrans%}</label>
+							<textarea id="description_prop" class="text ui-widget-content ui-corner-all">
+							</textarea>
+							<!-- Allow form submission with keyboard without duplicating the dialog button -->
+							<input id="proposal_Id" type="submit" tabindex="-1" style="position: absolute; top: -1000px">
+						</fieldset>
+					</form>
+				</div>
+				{% endif %}
+			</div>
+			<div class="push"></div>
+		</div>
+
+{% endblock %}
+
+{% block customscripts %}
+
+	<link href="{{ asset('jQuery-ui-1.11.2/jquery-ui.css') }}" rel="stylesheet"></link>
+	<link rel="stylesheet" href="{{ asset('lightbox/css/lightbox.css') }}"></link>
+
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins)
+    <script src="vendor/Flat-UI-master/js/vendor/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ asset('Flat-UI-master/js/vendor/video.js') }}"></script>
+    <!--<script src="{{ asset('Flat-UI-master/js/flat-ui.min.js') }}"></script>
+    <script src="{{ asset('Flat-UI-master/js/application.js' ) }}"></script>-->
+    <script src="{{ asset('custom/js/custom.js') }}"></script>
+	<script src="{{ asset('lightbox/js/lightbox.min.js') }}"></script>
+	<script src="{{ asset('jQuery-ui-1.11.2/jquery-ui.js') }}"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+<script type="text/javascript">
+
+	{% if app.user %}
+
+     	$(function() {
+			var dialog, form,
+
+			emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+			login = $("#login_prop"),
+			email = $("#email_prop"),
+			proposition = $("#proposition"),
+			description = $("#description_prop"),
+			allFields = $([]).add(login).add(email).add(proposition).add(description),
+			tips = $(".validateTips");
+
+			function updateTips(t) {
+				tips.text(t).addClass("ui-state-highlight");
+				setTimeout(function() {
+					tips.removeClass("ui-state-highlight", 1500);
+				}, 500);
+			}
+
+			function checkLength(o, n, min, max) {
+				if (o.val().length > max || o.val().length < min) {
+					o.addClass("ui-state-error");
+					updateTips("Le champ " + n + " doit etre entre " + min + " and " + max + ".");
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			function checkRegexp(o, regexp, n) {
+				if (!(regexp.test(o.val()))) {
+					o.addClass("ui-state-error");
+					updateTips(n);
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			function checkPositifNumber(o, n){
+				if(!isNaN(o.val()) && parseInt(o.val())>0 ){
+					return true;
+				}else{
+					o.addClass("ui-state-error");
+					updateTips("Le champ " + n + " doit etre un nombre positif.");
+					return false;
+				}
+			}
+
+			function submitPropal(){
+				var valid = true;
+				allFields.removeClass("ui-state-error");
+				valid = valid && checkLength(login, "Identifiant", 8, 16);
+				valid = valid && checkLength(proposition, "Proposition", 1, 16);
+				valid = valid && checkLength(email, "email", 6, 80);
+				valid = valid && checkRegexp(email, emailRegex, "exemple. inzbill26@gmail.com");
+				valid = valid && checkPositifNumber(proposition, "Proposition")
+				if (valid) {
+					/* Faire le traitement du formumaire ici*/
+
+					dialog.dialog("close");
+				}
+
+				return valid;
+			}
+
+			dialog = $("#dialog-form").dialog({
+				autoOpen : false,
+				height : 400,
+				width : 450,
+				modal : true,
+				buttons : {
+					"Envoyer cette proposition" : submitPropal,
+					"Annuler" : function() {
+						dialog.dialog("close");
+					}
+				},
+				close : function() {
+					form[0].reset();
+					allFields.removeClass("ui-state-error");
+				}
+			});
+
+			form = dialog.find("form").on("submit", function(event) {
+				event.preventDefault();
+				submitPropal();
+			});
+
+			$('#faire_proposition').click(function() { dialog.dialog("open"); });
+
+		});
+
+	{% endif %}
+
+	$formulaire = $('#details-form');
+	function annonceDetails(){
+		$formulaire.submit();
+	}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,402 @@
+{% extends '::djez.base.html.twig' %}
+
+{% block title %}
+{% trans %}publish.page{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container titre-rubrique light-gray">
+	{% trans %} publish_adds_page.caption {% endtrans %}
+</div>
+
+
+<div class="container light-gray">
+	<div class="main-wrapper">
+
+		<form id="publication-form" action="{{ path('djez_save_annonce') }}" method="POST" class="form-horizontal" role="form" name="publication-form" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label for="titre-annonce" class="col-lg-2 control-label">{% trans %} publish_form.add_title {% endtrans %}*</label>
+				<div class="col-lg-5">
+					<input name="titre" id="titre-annonce" type="text" class="component-min-width form-control" placeholder="{% trans %} publish_form.add_title_placeholder {% endtrans %}" data-validation="required" data-validation-error-msg="Obligatoire">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="categorie-annonce" class="col-lg-2 control-label">{% trans %} publish_form.add_categories {% endtrans %}</label>
+				<div class="col-lg-4">
+					<select name="categorie" onchange="showVehiculeBrands(); showPriceUnit()" id="categorie-annonce" data-toggle="select" placeholder="Type d'article" class="component-min-width form-control select select-default mrs mbm">
+						{% for subCategory in subCategories %}
+						<optgroup label="{{ subCategory.libelleSuperCategorie }}">
+							{% for category in categories %}
+							{% if category.idSuperCategorie.idSuperCategorie ==  subCategory.idSuperCategorie %}
+							<option value="{{ subCategory.libelleSuperCategorie }}-{{ category.idCategorie }}">{{category.libelleCategorie}}
+							</option>
+							{% endif %}
+							{% endfor %}
+						</optgroup>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div id="specific-to-car" class="do-not-display">
+				<!-- Specifique voiture -->
+
+				<div id="carbrands" class="form-group">
+					<label for="marque" class="col-lg-2 control-label">{% trans %} publish_form.car_brand {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="marque" onchange="showBrandModele()" name="marque" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+
+						</select>
+					</div>
+				</div>
+
+
+				<!-- Le modele sera chargé en fonction de la marque-->
+
+				<div id="carmodeles" class="form-group">
+					<label for="modele" class="col-lg-2 control-label">{% trans %} publish_form.car_modele {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="modele" name="modele" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+
+						</select>
+					</div>
+				</div>
+
+
+				<div id="cartransmission" class="form-group">
+					<label for="transmission" class="col-lg-2 control-label">{% trans %} publish_form.car_transmission {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="transmission" name="transmission" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+							<option value="manuelle">{% trans %} publish_form.car_transmission_manuelle {% endtrans %}</option>
+							<option value="automatique">{% trans %} publish_form.car_transmission_auto {% endtrans %}</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div id="caryears" class="form-group">
+					<label for="annee" class="col-lg-2 control-label">{% trans %} publish_form.car_annee {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="annee" name="annee" type="number" class="component-min-width form-control" placeholder="2005">
+					</div>
+				</div>
+
+
+				<div id="carpower" class="form-group">
+					<label for="power" class="col-lg-2 control-label">{% trans %} publish_form.car_power {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="power" name="puissance" type="number" class="component-min-width form-control" validation="number" data-validation-allowing="integer" data-validation-error-msg="Donnée invalide">
+					</div>
+				</div>
+
+
+				<div id="carenergy" class="form-group">
+					<label for="energy" class="col-lg-2 control-label">{% trans %} publish_form.car_energy {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="energy" name="carburant" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+							<option value="ES">{% trans %} publish_form.car_energy_essence {% endtrans %}</option>
+							<option value="DI">{% trans %} publish_form.car_energy_diesel {% endtrans %}</option>
+							<option value="GP">{% trans %} publish_form.car_energy_gpl {% endtrans %}</option>
+							<option value="EL">{% trans %} publish_form.car_energy_electrique {% endtrans %}</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div id="carmiles" class="form-group">
+					<label for="kilometrage" class="col-lg-2 control-label">{% trans %} publish_form.car_kilometrage {% endtrans %}</label>
+					<div class="col-lg-4">
+						<input id="kilometrage" name="kilometrage" type="number" class="component-min-width form-control"
+						validation="number" data-validation-allowing="integer" data-validation-error-msg="Donnée invalide">
+					</div>
+				</div>
+
+			</div>
+			<!-- Fin specifique to car -->
+
+			<div class="form-group" style="position:relative;">
+				<label for="prix" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.prix {% endtrans %}*</label>
+				<div class="col-lg-4">
+					<input id="prix" name="prix" type="number" class="component-min-width form-control inline-form-element" data-validation="number" data-validation-allowing="float" data-validation-error-msg="Donnée invalide" >
+				</div>
+				<div class="col-lg-3">
+				<label for="unite" style="float:right;">
+					<select id="unite" name="unite" data-toggle="select" class="form-control select select-default mrs mbm do-not-display">
+						<option value="Kilogramme">{% trans %} publish_form.kilogramme {% endtrans %}</option>
+						<option value="Tonne">{% trans %} publish_form.tonne {% endtrans %}</option>
+						<option value="Litre">{% trans %} publish_form.litre {% endtrans %}</option>
+					</select>
+				</label>
+			</div>
+			</div>
+
+
+			<div class="form-group">
+				<label for="devise" class="col-lg-2 control-label">{% trans %} publish_form.devise {% endtrans %}</label>
+				<div class="col-lg-1">
+					<select id="devise" name="devise-annonce" data-toggle="select" class="form-control select select-default mrs mbm">
+						<option value="FCFA">{% trans %} publish_form.cfa {% endtrans %}</option>
+						<option value="EUR">{% trans %} publish_form.eur {% endtrans %}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-1">
+					<label class="checkbox" for="negociable">
+						<input name="negociable" type="checkbox" data-toggle="checkbox" id="negociable">
+						{% trans %} publish_form.negociable {% endtrans %}
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="localisation" class="col-lg-2 control-label">{% trans %} publish_form.localisation {% endtrans %}</label>
+				<div class="col-lg-4">
+					<select id="localisation" onchange="displayOtherLocalisationInput()" name="localisation" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+					{% for place in places %}
+						<option value="{{ place.idLocalisation }}">{{ place.ville }}</option>
+					{% endfor %}
+						<option value="OTHER">{% trans %} publish_form.localisation_other {% endtrans %}</option>
+					</select>
+				</div>
+				<label for="localisation-other">
+					<input type="text" name="localisation-other" placeholder="Pays-Ville" class="component-min-width form-control do-not-display" id="localisation-other" >
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="description" class="col-lg-2 control-label">{% trans %} publish_form.description {% endtrans %}*</label>
+				<div class="col-lg-5">
+					<textarea id="description" name="description" class="component-min-width form-control" placeholder="Decriver votre article." rows="3" data-validation="required" data-validation-error-msg="Obligatoire" ></textarea>
+					<span id="desc-max-length">1000</span> {% trans %} publish_form_description.remaining_word{% endtrans %}
+				</div>
+			</div>
+
+			<div class="form-group" style="position:relative;">
+				<label for="photo-1" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.photo_1 {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="photo-1" class="inline-form-element" id="photo-1" type="file" accept="image/*" >
+					<span title="{% trans %} publish_form.delete_photo {% endtrans %}" id="supprimer-photo-1" style="cursor:pointer;color:red;">X</span>
+					<label title="{% trans %} publish_form.accroche {% endtrans %}" class="radio" for="accroche-1" style="float:right;">
+						<input type="radio" data-toggle="radio" name="accroche" id="accroche-1" value="photo-1" data-radiocheck-toggle="radio" >
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group" style="position:relative;">
+				<label for="photo-2" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.photo_2 {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="photo-2" class="inline-form-element" id="photo-2" type="file" accept="image/*" >
+					<span title="{% trans %} publish_form.delete_photo {% endtrans %}" id="supprimer-photo-2" style="cursor:pointer;color:red;">X</span>
+					<label title="{% trans %} publish_form.accroche {% endtrans %}" class="radio" for="accroche-2" style="float:right;">
+						<input type="radio" data-toggle="radio" name="accroche" id="accroche-2" value="photo-2" data-radiocheck-toggle="radio" >
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group" style="position:relative;">
+				<label for="photo-3" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.photo_3 {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="photo-3" class="inline-form-element" id="photo-3" type="file" accept="image/*" >
+					<span title="{% trans %} publish_form.delete_photo {% endtrans %}" id="supprimer-photo-3" style="cursor:pointer;color:red;">X</span>
+					<label title="{% trans %} publish_form.accroche {% endtrans %}" class="radio" for="accroche-3" style="float:right;">
+						<input type="radio" data-toggle="radio" name="accroche" id="accroche-3" value="photo-3" data-radiocheck-toggle="radio" >
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group" style="position:relative;">
+				<label for="photo-4" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.photo_4 {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="photo-4" class="inline-form-element" id="photo-4" type="file" accept="image/*" >
+					<span title="{% trans %} publish_form.delete_photo {% endtrans %}" id="supprimer-photo-4" style="cursor:pointer;color:red;">X</span>
+					<label title="{% trans %} publish_form.accroche {% endtrans %}" class="radio" for="accroche-4" style="float:right;">
+						<input type="radio" data-toggle="radio" name="accroche" id="accroche-4" value="photo-4" data-radiocheck-toggle="radio" >
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group" style="position:relative;">
+				<label for="photo-5" class="col-lg-2 control-label" style="float:left;">{% trans %} publish_form.photo_5 {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="photo-5" class="inline-form-element" id="photo-5" type="file" accept="image/*" >
+					<span title="{% trans %} publish_form.delete_photo {% endtrans %}" id="supprimer-photo-5" style="cursor:pointer;color:red;">X</span>
+					<label title="{% trans %} publish_form.accroche {% endtrans %}" class="radio" for="accroche-5" style="float:right;">
+						<input type="radio" data-toggle="radio" name="accroche" id="accroche-5" value="photo-5" data-radiocheck-toggle="radio" >
+					</label>
+				</div>
+			</div>
+
+			<fieldset id="annoncer-perso-data" class="annonce-vente">
+				<legend > {% trans %} publish_form.legende_identite_section {% endtrans %} </legend>
+
+				<div class="form-group offset-left">
+					<label class="radio" for="optionsRadios1">
+						<input type="radio" data-toggle="radio" name="typeAnnonceur" id="optionsRadios1" value="PARTICULIER" data-radiocheck-toggle="radio" >
+						{% trans %} publish_form.annonceur_particulier {% endtrans %}
+					</label>
+					<label class="radio" for="optionsRadios2" >
+						<input type="radio" data-toggle="radio" name="typeAnnonceur" id="optionsRadios2" value="PROFESSIONEL" data-radiocheck-toggle="radio" checked="">
+						{% trans %} publish_form.annonceur_professionel {% endtrans %}
+					</label>
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail1" class="col-lg-2 control-label">{% trans %} publish_form.annonceur_email {% endtrans %}*</label>
+					<div class="col-lg-5">
+						<input type="email" name="email" class="component-min-width form-control" id="inputEmail1" placeholder="ahenris@domain.com" data-validation="email" data-validation-error-msg="Donnée invalide">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="inputPhone" class="col-lg-2 control-label">{% trans %} publish_form.annonceur_telephone {% endtrans %}</label>
+					<div class="col-lg-5">
+						<input type="tel" name="telephone" class="component-min-width form-control" id="inputPhone" placeholder="+330622330385" data-validation="number" data-validation-error-msg="Numero invalide" data-validation-optional="true">
+					</div>
+				</div>
+
+			</fieldset>
+
+			<div class="annonce-publish-button">
+				<button id="submit-btn" type="submit" class="btn btn-primary navigation_bouton"><span class="fui-document custom-spacing"></span>{% trans %} button.publier {% endtrans %}</button>
+				<a href="{{ path('djez_accueil_homepage') }}" class="btn btn-primary navigation_bouton" id="cancel-btn"><span class="fui-cross custom-spacing"></span>{% trans %} button.annuler {% endtrans %}</a>
+			</div>
+		</form>
+
+	</div>
+
+	<div class="push"></div>
+</div>
+
+{% endblock %}
+
+
+{% block customscripts %}
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+<script src="{{ asset('Flat-UI-master/js/vendor/jquery.min.js') }}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('Flat-UI-master/js/vendor/video.js') }}"></script>
+<!--<script src="{{ asset('Flat-UI-master/js/flat-ui.min.js') }}"></script>
+<script src="{{ asset('Flat-UI-master/js/application.js') }}"></script>-->
+<script src="{{ asset('form-validator/jquery.form-validator.min.js') }}"></script>
+
+
+<script type="text/javascript">
+				// Gestion de l'affichage des erreurs de sauvegarde
+				{% if processingMsg != null %}
+						$( document ).ready(function() {
+							alert('{{processingMsg}}');
+						});
+				{% endif %}
+	    	//var $categorieComp = $("select[name='categorie']");
+	    	var $categorieComp = $("#categorie-annonce");
+	    	var $specificToCar = $("#specific-to-car");
+	    	var $marque = $("#marque");
+	    	var $modele = $("#modele");
+	    	// To share the category value
+	    	var categorieRef;
+
+	    	// Brands drop down
+	    	function showVehiculeBrands() {
+
+	    		var selectedValue = $categorieComp.val();
+	    		var superCategory = selectedValue.split("-")[0];
+	    		categorieRef = selectedValue.split("-")[1];
+	    		if( superCategory == "VEHICULE" ){
+
+	    			$.ajax({
+	    				type: "POST",
+	    				url: "{{ path('djez_publier_annonce')}}",
+	    				data: { idCategorie : categorieRef, queryAction : "MARQUE" },
+	    				cache: false,
+	    				success: function(marques){
+	    					$marque.html(marques);
+	    					$specificToCar.removeClass( "do-not-display" ).addClass( "do-display" );
+	    				}
+	    			});
+
+	    		}else{
+	    			$specificToCar.removeClass( "do-display" ).addClass( "do-not-display" );
+	    		}
+	    	}
+	    	//$categorieComp.change(showVehiculeBrands);
+
+	    	// Modeles drop down
+	    	function showBrandModele() {
+	    		var marque = $marque.val();
+	    		$.ajax({
+	    			type: "POST",
+	    			url: "{{ path('djez_publier_annonce')}}",
+	    			data: { idMarque : marque, idCategorie : categorieRef, queryAction : "MODELE" },
+	    			cache: false,
+	    			success: function(modele){
+	    				$modele.html(modele);
+	    			}
+	    		});
+	    	}
+				// Gestion de la localisation
+				$localisationOtherInput = $('#localisation-other');
+				$localisationSelect = $('#localisation');
+				function displayOtherLocalisationInput(){
+					if ($localisationSelect.val() == "OTHER") {
+						$localisationOtherInput.removeClass('do-not-display').addClass('do-display');
+					}else {
+						$localisationOtherInput.removeClass('do-display').addClass('do-not-display');
+					}
+				}
+
+				// Gestion des unités
+				$unite = $('#unite');
+				function showPriceUnit(){
+					var superCategory = $categorieComp.val().split("-")[0];
+					if (superCategory == "PRODUITS AGRICOLES" ||
+						  superCategory == "PRODUIT D'ELEVAGE"  ||
+							superCategory == "PRODUITS VIVRIERS"  ||
+							superCategory == "AUTRES PRODUITS"
+						 )
+						 {
+							 $unite.removeClass('do-not-display').addClass('do-display');
+						 }else {
+							 $unite.removeClass('do-display').addClass('do-not-display');
+						 }
+				}
+
+				// Gestion de la suppression des photos
+				$('#supprimer-photo-1').on('click', function(){
+					$('#photo-1').replaceWith('<input name="photo-1" class="inline-form-element" id="photo-1" type="file" accept="image/*" >');
+				});
+
+				$('#supprimer-photo-2').on('click', function(){
+					$('#photo-2').replaceWith('<input name="photo-2" class="inline-form-element" id="photo-2" type="file" accept="image/*" >');
+				});
+
+				$('#supprimer-photo-3').on('click', function(){
+					$('#photo-3').replaceWith('<input name="photo-3" class="inline-form-element" id="photo-3" type="file" accept="image/*" >');
+				});
+
+				$('#supprimer-photo-4').on('click', function(){
+					$('#photo-4').replaceWith('<input name="photo-4" class="inline-form-element" id="photo-4" type="file" accept="image/*" >');
+				});
+
+				$('#supprimer-photo-5').on('click', function(){
+					$('#photo-5').replaceWith('<input name="photo-5" class="inline-form-element" id="photo-5" type="file" accept="image/*" >');
+				});
+
+	    	//$marque.change(showBrandModele);
+
+			// Restriction on number of word for description field
+			$('#description').restrictLength( $('#desc-max-length') );
+
+
+			// Validation configuration
+			// Load validation modules
+			$.validate({
+			  form : '#publication-form'
+			});
+
+</script>
+{% endblock %}

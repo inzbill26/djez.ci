@@ -1,0 +1,19 @@
+{% extends '::djez.base.html.twig' %}
+
+{% block body %}
+
+<div class="container titre-rubrique light-gray">
+	{% trans %}add_details.publish_date{% endtrans %}
+</div>
+
+	<div class="container light-gray">
+		<div class="main-wrapper">
+
+			{% block fos_user_content %}
+			{% endblock fos_user_content %}
+
+			<div class="push"></div>
+		</div>
+	</div>
+
+{% endblock %}

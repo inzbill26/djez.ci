@@ -1,0 +1,4 @@
+services:
+#    djez_admin.example:
+#        class: Djez\Bundle\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

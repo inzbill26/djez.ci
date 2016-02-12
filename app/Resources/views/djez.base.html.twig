@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>
+		{% block title %}  {% endblock %}
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{ asset('Flat-UI-master/css/vendor/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('Flat-UI-master/css/flat-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('custom/css/generic.css') }}" rel="stylesheet" type="text/css" media="all">
+    <!-- include the core styles -->
+	<link href="{{ asset('alertify/themes/alertify.core.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<!-- include a theme, can be included into the core instead of 2 separate files -->
+	<link href="{{ asset('alertify/themes/alertify.default.css') }}" rel="stylesheet" type="text/css" media="all" />
+  </head>
+  <body>
+  	<div id="header">
+  		<div id="top_header">
+  			<div class="container">
+
+  		<div class="language_div">
+  			<a href="{{ path('djez_devise', {'devise': 'EUR'}) }}"><img title="Prix en euro" class="flags" src="{{ asset('custom/images/ue.png') }}"></a>
+  			<a href="{{ path('djez_devise', {'devise': 'FCFA'}) }}"><img title="Prix en fcfa" class="flags"  src="{{ asset('custom/images/cedeao.jpg') }}"></a>
+  		</div>
+
+      <div id="user_admin">
+      	<ul id="user_logged">
+
+      		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+
+      		<li class="top_header_connexion_li">
+      			<span class="fui-user"></span>
+      			<a id="connexion-link" href="{{ path("fos_user_security_login") }}">{% trans %} user.connexion {% endtrans %}</a>
+      		</li>
+
+			{% else %}
+	    		<li>
+	      			<span class="fui-list-bulleted">
+
+	      			<div role="toolbar" class="btn-toolbar btn-toolbar-customization">
+	      					<div class="btn-group">
+	      						<a id="connected-user" class="btn btn-default btn-xs dropdown-toggle">
+	      							{{ app.user.username }}<span class="caret"></span>
+	      						</a>
+	      						<ul id="connected-user-menu" role="menu" class="dropdown-menu dropdown-menu-customization">
+	      							<li><a href="#">{{ 'user.account' | trans }}</a></li>
+	      							<li><a href="#">{{ 'user.adds' | trans }}</a></li>
+	      							<li><a href="#">{{ 'user.mails' | trans }}<span class="fui-mail"></span></a></li>
+	      							<li class="divider"></li>
+	      							<li><a href="{{ path("fos_user_security_logout") }}">{{ 'user.disconnect' | trans }}<span class="fui-exit"></span></a> </li>
+	      						</ul>
+	      					</div>
+	      				</div>
+	      			</span>
+	      		</li>
+		    {% endif %}
+      	</ul>
+      </div>
+
+  <!-- Login form -->
+
+  <div id="inline-login-div" class="inline-login-form">
+  	<form id="inline-login-form" class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post" >
+
+  		<input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+
+  		<div class="form-group inline-login-form-component">
+  			<input type="text" class="form-control inline-login-field component-min-width input-sm" name="_username" value="" id="inline-login"
+  			placeholder="Login" >
+  			<label class="inline-login-field-icon fui-user" for="login-input"></label>
+  		</div>
+
+  		<div class="form-group inline-login-form-component">
+  			<input type="password" class="form-control inline-login-field component-min-width input-sm" name="_password" value="" id="inline-password"
+  			placeholder="Password" >
+  			<label class="inline-login-field-icon fui-lock" for="inline-password"></label>
+  		</div>
+
+  		<a class="btn btn-primary btn-lg btn-block inline-login-btn-size" id="submit-login" href="#">
+  			{{ 'user.connexion' | trans }}
+  		</a>
+
+  		<div class="credential-lost-inline">
+  			<a class="identifiant-oublie" href="{{ path("fos_user_resetting_request") }}">
+  				{{ 'user_credential.forgotten' | trans }}
+  			</a>
+  			<a class="creer-compte" href="{{ path("fos_user_registration_register") }}">
+  				{{'user_account.creation' | trans}}
+			</a>
+  		</div>
+
+  	</form>
+  </div>
+</div>
+</div>
+
+<div id="bottom_header">
+
+	<div class="container">
+		<div id="menu">
+			<ul id="menu_horizontal" class="navigation">
+				<li class="navigation_element {% if (selectedTab  == 1) %} selected-menu-element {% endif %}"><a id="accueil_id" href="{{ path('djez_accueil_pagination_homepage') }}">{% trans %} home_page.title {% endtrans %}
+</a></li>
+				<li class="navigation_element {% if (selectedTab  == 2) %} selected-menu-element {% endif %}"> <a id="vendre" href="{{ path('djez_publier_annonce') }}">{% trans %} navigation_bar.sell {% endtrans %}</a></li>
+				<li class="navigation_element {% if (selectedTab  == 3) %} selected-menu-element {% endif %}"> <a onclick="horizontal_menu(this)" id="acheter" href="{{ path('djez_recherche_avancee') }}">{% trans %}navigation_bar.buy{% endtrans %}</a></li>
+				<li class="navigation_element {% if (selectedTab  == 4) %} selected-menu-element {% endif %}"> <a onclick="horizontal_menu(this)" id="confie_mission" href="#">{% trans %}  navigation_bar.mission {% endtrans %}
+</a> </li>
+				<li class="navigation_element {% if (selectedTab  == 5) %} selected-menu-element {% endif %}"> <a onclick="horizontal_menu(this)" id="boutique" href="#">{% trans %} navigation_bar.shops {% endtrans %}
+</a> </li>
+				<li class="navigation_element {% if (selectedTab  == 6) %} selected-menu-element {% endif %}"> <a onclick="horizontal_menu(this)" id="aide" href="#">{% trans %} navigation_bar.help {% endtrans %}
+</a> </li>
+			</ul>
+		</div>
+	</div>
+	<!--</div>-->
+</div>
+</div>
+
+{% block quicksearch %}
+
+ 	{{ render(controller('DjezClientBundle:Header:quicksearch')) }}
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
+
+
+ <div class="container">
+	<div id="footer" class="footer">
+		<ul>
+			<li><a href="#">© Maraboo</a></li>
+			<li><a href="#">Règles</a></li>
+			<li><a href="#">Commerce sécurisé</a></li>
+			<li><a href="#">Copyright</a></li>
+			<li><a href="#">Vie Privée</a></li>
+			<li><a href="#">Plan du site</a></li>
+			<li><a href="#">Boutiques</a></li>
+			<li><a href="#">Support</a></li>
+			<li><a href="#">Presse</a></li>
+			<li><a href="#">Mobile</a></li>
+		</ul>
+
+	</div>
+</div>
+
+
+	<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+	<script src="{{ asset('Flat-UI-master/js/vendor/jquery.min.js') }}"></script>
+	<script src="{{ asset('alertify/lib/alertify.min.js') }}"></script>
+	<script src="{{ asset('Flat-UI-master/js/flat-ui.min.js') }}"></script>
+	<script src="{{ asset('Flat-UI-master/js/application.js') }}"></script>
+
+ 	{% block customscripts %}
+
+	{% endblock %}
+
+ 	<script type="text/javascript">
+
+		$(".top_header_connexion_li").mouseover(function() {
+		    	// .position() uses position relative to the offset parent,
+		    	var pos = $(this).position();
+
+			    // .outerWidth() takes into account border and padding.
+			    var width = $(this).outerWidth();
+
+			    //show the menu directly over the placeholder
+			    $("#inline-login-div").css({
+			    	position: "absolute",
+			    	top: pos.top + 22 + "px",
+			    	left: pos.left + "px"
+			    }).show("slow");
+			});
+
+		$("#inline-login-div").mouseleave(function(){
+			$(this).hide("slow");
+		});
+
+		$("#connected-user").mouseover(function(){
+			$("#connected-user-menu").show("slow");
+		});
+
+		$("#connected-user-menu").mouseleave(function(){
+			$(this).hide("slow");
+		});
+
+
+		$loginForm = $("#inline-login-form");
+		$("#submit-login").on('click',function(){
+
+			login = $("#inline-login").val();
+			password = $("inline-password").val();
+
+			if( login == null || $.trim(login) == "" ){
+				return false;
+			//}else if ( password == null || $.trim(password) == "" ) {
+			//	return false;
+			}else{
+				$loginForm.submit();
+			}
+
+		});
+
+
+	</script>
+
+</body>
+</html>

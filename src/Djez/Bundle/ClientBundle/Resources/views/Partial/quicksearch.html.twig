@@ -1,0 +1,52 @@
+<div class="container light-gray put-in-back-plan">
+
+	<div class="quick-search-form-container">
+
+
+		<form class="form-inline" role="form">
+
+			<div class="form-group category-position">
+
+				<select data-toggle="select" class="component-min-width form-control select select-default select-sm mrs">
+					<option value="">-- {% trans %} quick_search.category {% endtrans %}--</option>
+					{% for subCategory in subCategories %}
+						<optgroup label="{{ subCategory.libelleSuperCategorie }}">
+							{% for category in categories %}
+								{% if category.idSuperCategorie.idSuperCategorie ==  subCategory.idSuperCategorie %}
+					 		<option value="{{ category.idCategorie }}">{{category.libelleCategorie}}</option>
+					 			{% endif %}
+							{% endfor %}
+					 	</optgroup>
+					{% endfor %}
+				</select>
+
+			</div>
+
+			<div class="form-group lookup-keyword-position">
+				<input type="text" class="component-min-width form-control input-sm" id="exampleInputPassword2" placeholder="Que rechercher vous ?" value="">
+			</div>
+
+			<div class="form-group min-price-position">
+				<select data-toggle="select" class="component-min-width form-control select select-default select-sm mrs">
+					<option value="">-- {% trans %} quick_search.min_price {% endtrans %} ( {{ devise }} ) --</option>
+					{% for price in prices %}
+					 	<option value="{{ price.valeur }}">{{ price.valeur }}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div class="form-group max-price-position">
+				<select data-toggle="select" class="component-min-width form-control select select-default select-sm mrs">
+					<option value="">-- {% trans %} quick_search.max_price {% endtrans %} ( {{ devise }} ) --</option>
+					{% for price in prices %}
+					 	<option value="{{ price.valeur }}">{{ price.valeur }}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<button id="quick-search-btn" type="button" class="btn btn-primary search-btn">{% trans %} quick_search.search_button {% endtrans %}
+<span class="fui-search"></span></button>
+		</form>
+
+	</div>
+</div>

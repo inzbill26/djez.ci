@@ -1,0 +1,4 @@
+services:
+#    djez_data_modele.example:
+#        class: Djez\Bundle\DataModeleBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

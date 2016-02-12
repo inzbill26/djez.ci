@@ -1,0 +1,3 @@
+services:
+    djez_accueil_service:
+        class: Djez\Bundle\ClientBundle\Controller\AccueilController

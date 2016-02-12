@@ -1,0 +1,3 @@
+djez_data_modele_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DjezDataModeleBundle:Default:index }

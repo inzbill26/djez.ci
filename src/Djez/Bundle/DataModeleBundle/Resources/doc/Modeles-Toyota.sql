@@ -1,0 +1,17 @@
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Auris');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Auris Touring Sports');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Avensis');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Avensis Sw');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Aygo');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Gt');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Land Cruiser');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Land Cruiser Sw');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Land Cruiser Sw Rc');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Prius');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Prius Rechargeable');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Prius+');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Rav4 Lca 2');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Verso');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Verso-S Mc');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Yaris');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(51,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Yaris Hybride');;

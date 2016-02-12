@@ -1,0 +1,477 @@
+{% extends '::djez.base.html.twig' %}
+
+{% block title %}
+{% trans %}search.page{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container titre-rubrique light-gray">
+	{% trans %} search_adds_page.caption {% endtrans %}
+</div>
+
+
+<div class="container light-gray">
+	<div class="main-wrapper">
+
+		<form id="search-form" action="{{ path('djez_valider_recherche_avancee') }}" method="POST" class="form-horizontal" role="form" name="search-form">
+
+			<div class="form-group">
+				<label for="titre-annonce" class="col-lg-2 control-label">{% trans %} search_form.keyword {% endtrans %}</label>
+				<div class="col-lg-5">
+					<input name="motcle" id="titre-annonce" type="text" class="component-min-width form-control" placeholder="{% trans %} search_form.keyword {% endtrans %}" >
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="categorie-annonce" class="col-lg-2 control-label">{% trans %} publish_form.add_categories {% endtrans %}</label>
+				<div class="col-lg-4">
+					<select name="categorie" onchange="showVehiculeBrands()" id="categorie-annonce" data-toggle="select" placeholder="Type d'article" class="component-min-width form-control select select-default mrs mbm">
+						{% for subCategory in subCategories %}
+						<optgroup label="{{ subCategory.libelleSuperCategorie }}">
+							{% for category in categories %}
+							{% if category.idSuperCategorie.idSuperCategorie ==  subCategory.idSuperCategorie %}
+							<option value="{{ subCategory.libelleSuperCategorie }}-{{ category.idCategorie }}">{{category.libelleCategorie}}
+							</option>
+							{% endif %}
+							{% endfor %}
+						</optgroup>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div id="specific-to-car" class="do-not-display">
+				<!-- Specifique voiture -->
+
+				<div id="carbrands" class="form-group">
+					<label for="marque" class="col-lg-2 control-label">{% trans %} publish_form.car_brand {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="marque" onchange="showBrandModele()" name="marque" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+
+						</select>
+					</div>
+				</div>
+
+
+				<!-- Le modele sera chargé en fonction de la marque-->
+
+				<div id="carmodeles" class="form-group">
+					<label for="modele" class="col-lg-2 control-label">{% trans %} publish_form.car_modele {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="modele" name="modele" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+
+						</select>
+					</div>
+				</div>
+
+
+				<div id="cartransmission" class="form-group">
+					<label for="transmission" class="col-lg-2 control-label">{% trans %} publish_form.car_transmission {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="transmission" name="transmission" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+							<option value="indifferent">{% trans %}both_type.annonceur{% endtrans %}</option>
+							<option value="manuelle">{% trans %} publish_form.car_transmission_manuelle {% endtrans %}</option>
+							<option value="automatique">{% trans %} publish_form.car_transmission_auto {% endtrans %}</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div id="caryears_min" class="form-group">
+					<label for="annee_min" class="col-lg-2 control-label">{% trans %} annee.min {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="annee_min" name="annee_min" type="number" class="component-min-width form-control">
+					</div>
+					<span id="year_min_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+				<div id="caryears_max" class="form-group">
+					<label for="annee_max" class="col-lg-2 control-label">{% trans %} annee.max {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="annee_max" name="annee_max" type="number" class="component-min-width form-control" placeholder="{{ "now"|date("Y") }}" >
+					</div>
+					<span id="year_max_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+
+				<div id="carpower_min" class="form-group">
+					<label for="power_min" class="col-lg-2 control-label">{% trans %} power.min {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="power_min" name="puissance_min" type="number" class="component-min-width form-control">
+					</div>
+					<span id="power_min_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+
+				<div id="carpower_max" class="form-group">
+					<label for="power_max" class="col-lg-2 control-label">{% trans %} power.max {% endtrans %}</label>
+					<div class="col-lg-2">
+						<input id="power_max" name="puissance_max" type="number" class="component-min-width form-control" >
+					</div>
+					<span id="power_max_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+
+				<div id="carenergy" class="form-group">
+					<label for="energy" class="col-lg-2 control-label">{% trans %} publish_form.car_energy {% endtrans %}</label>
+					<div class="col-lg-4">
+						<select id="energy" name="carburant" data-toggle="select" class="component-min-width form-control select select-default mrs mbm">
+							<option value="IN">{% trans %} publish_form.car_energy_indifferent {% endtrans %}</option>
+							<option value="ES">{% trans %} publish_form.car_energy_essence {% endtrans %}</option>
+							<option value="DI">{% trans %} publish_form.car_energy_diesel {% endtrans %}</option>
+							<option value="GP">{% trans %} publish_form.car_energy_gpl {% endtrans %}</option>
+							<option value="EL">{% trans %} publish_form.car_energy_electrique {% endtrans %}</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div id="carmiles_min" class="form-group">
+					<label for="kilometrage_min" class="col-lg-2 control-label">{% trans %} kilometrage.min {% endtrans %}</label>
+					<div class="col-lg-4">
+						<input id="kilometrage_min" name="kilometrage_min" type="number" class="component-min-width form-control">
+					</div>
+					<span id="mile_min_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+				<div id="carmiles_max" class="form-group">
+					<label for="kilometrage_max" class="col-lg-2 control-label">{% trans %} kilometrage.max {% endtrans %}</label>
+					<div class="col-lg-4">
+						<input id="kilometrage_max" name="kilometrage_max" type="number" class="component-min-width form-control">
+					</div>
+					<span id="mile_max_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+				</div>
+
+			</div>
+			<!-- Fin specifique to car -->
+
+			<div class="form-group">
+				<label for="prix_min" class="col-lg-2 control-label">{% trans %} quick_search.min_price {% endtrans %}</label>
+				<div class="col-lg-4">
+					<input id="prix_min" name="prix_min" type="number" class="component-min-width form-control inline-form-element" >
+				</div>
+				<span id="prix_mmin_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+			</div>
+
+			<div class="form-group">
+				<label for="prix_max" class="col-lg-2 control-label">{% trans %} quick_search.max_price {% endtrans %}</label>
+				<div class="col-lg-4">
+					<input id="prix_max" name="prix_max" type="number" class="component-min-width form-control inline-form-element" >
+				</div>
+				<span id="prix_max_error_msg" class="do-not-display help-block form-error">{% trans %}error.invalid_msg{% endtrans %}</span>
+			</div>
+
+
+			<div class="form-group">
+				<label for="devise" class="col-lg-2 control-label">{% trans %} publish_form.devise {% endtrans %}</label>
+				<div class="col-lg-1">
+					<select id="devise" name="devise_annonce" data-toggle="select" class="form-control select select-default mrs mbm">
+						<option value="FCFA">{% trans %} publish_form.cfa {% endtrans %}</option>
+						<option value="EUR">{% trans %} publish_form.eur {% endtrans %}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-1">
+					<label class="checkbox" for="particulier">
+						<input type="checkbox" data-toggle="checkbox" name="particulier" id="particulier">
+						{% trans %} publish_form.annonceur_particulier {% endtrans %}
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-1">
+					<label class="checkbox" for="professionnel" >
+						<input type="checkbox" data-toggle="checkbox" name="professionnel" id="professionnel">
+						{% trans %} publish_form.annonceur_professionel {% endtrans %}
+					</label>
+				</div>
+			</div>
+
+			<div class="annonce-publish-button">
+				<button id="submit-btn" type="submit" class="btn btn-primary navigation_bouton"><span class="fui-search custom-spacing"></span>{% trans %} quick_search.search_button {% endtrans %}</button>
+				<a href="{{ path('djez_accueil_homepage') }}" class="btn btn-primary navigation_bouton" id="cancel-btn"><span class="fui-cross custom-spacing"></span>{% trans %} button.annuler {% endtrans %}</a>
+			</div>
+
+		</form>
+
+	</div>
+
+	<div class="push"></div>
+
+</div>
+
+{% endblock %}
+
+{% block customscripts %}
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+<script src="{{ asset('Flat-UI-master/js/vendor/jquery.min.js') }}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('Flat-UI-master/js/vendor/video.js') }}"></script>
+<!--<script src="{{ asset('Flat-UI-master/js/flat-ui.min.js') }}"></script>
+<script src="{{ asset('Flat-UI-master/js/application.js') }}"></script>-->
+<script src="{{ asset('form-validator/jquery.form-validator.min.js') }}"></script>
+
+
+<script type="text/javascript">
+
+		// Validation configuration
+		// Load validation modules
+		$.validate({
+			form : '#search-form'
+		});
+
+		//select integers only
+		var intRegex = /[0-9 -()+]+$/;
+		//match ints and floats/decimals
+		var floatRegex = '[-+]?([0-9]*.[0-9]+|[0-9]+)';
+		//match ints from 0 to 200
+		var num0to200Regex = '^([01][0-9][0-9]|200)$';
+
+		// Handle min max year
+		var $anneeMax = $("#annee_max");
+		var $anneeMin = $("#annee_min");
+		var $anneeMinErrorMsg = $("#year_min_error_msg");
+		var $anneeMaxErrorMsg = $("#year_max_error_msg");
+
+		$anneeMax.on('focusout',function () {
+			var anneeMax = $(this).val();
+			//Si null on ne fait rien
+			if (anneeMax == null || anneeMax == '') {
+				$(this).val('');
+				$anneeMaxErrorMsg.hide();
+				return true;
+			}
+			if (!anneeMax.match(intRegex)) {
+				// Show error message
+				$anneeMaxErrorMsg.show();
+				//$anneeMax.attr('number',)
+			}else {
+				$anneeMaxErrorMsg.hide();
+				var anneeMin = parseInt($anneeMin.val());
+				if ( anneeMax < anneeMin ) {
+					$anneeMin.val( anneeMax );
+				}
+			}
+		});
+
+		$anneeMin.on('focusout',function () {
+			var anneeMin = $(this).val();
+			//Si null ou non entier on vide le champ
+			if (anneeMin == null || anneeMin == '') {
+				$(this).val('');
+				$anneeMinErrorMsg.hide();
+				return true;
+			}
+			if (anneeMin.match(intRegex) == null) {
+				//Show error message
+				$anneeMinErrorMsg.show();// removeClass( "do-not-display" ).addClass( "do-display" );
+			} else {
+
+				$anneeMinErrorMsg.hide(); //removeClass( "do-display" ).addClass( "do-not-display" );
+				var anneeMax = parseInt($anneeMax.val());
+				if ( anneeMin > anneeMax ) {
+					$anneeMax.val(anneeMin);
+				}
+			}
+		});
+		// End min max year handling
+
+		// Handle power min max
+		var $powerMax = $("#power_max");
+		var $powerMin = $("#power_min");
+		var $powerMinErrorMsg = $("#power_min_error_msg");
+		var $powerMaxErrorMsg = $("#power_max_error_msg");
+
+		$powerMax.on('focusout',function () {
+			var powerMax = $(this).val();
+			//Si null on ne fait rien
+			if (powerMax == null || powerMax == '') {
+				$(this).val('');
+				$powerMaxErrorMsg.hide();
+				return true;
+			}
+			if (!powerMax.match(num0to200Regex)) {
+				// Affiche le message d'erreur
+				$powerMaxErrorMsg.show();
+			} else {
+				$powerMaxErrorMsg.hide();
+				var powerMin = parseInt($powerMin.val());
+				if ( powerMax < powerMin ) {
+					$powerMin.val( powerMax );
+				}
+			}
+		});
+
+		$powerMin.on('focusout',function () {
+			var powerMin = $(this).val();
+			//Si null on ne fait rien
+			if (powerMin == null || powerMin == '') {
+				$(this).val('');
+				$powerMinErrorMsg.hide();
+				return true;
+			}
+			if (!powerMin.match(num0to200Regex)) {
+				// Affiche le message d'erreur
+				$powerMinErrorMsg.show();
+			} else {
+				$powerMinErrorMsg.hide();
+				var powerMax = parseInt($powerMax.val());
+				if ( powerMin > powerMax ) {
+					$powerMax.val(powerMin);
+				}
+			}
+		});
+		// End min max power handling
+
+		// Handle miles min max
+		var $milesMax = $("#kilometrage_max");
+		var $milesMin = $("#kilometrage_min");
+		var $milesMinErrorMsg = $("#mile_min_error_msg");
+		var $milesMaxErrorMsg = $("#mile_max_error_msg");
+
+		$milesMax.on('focusout',function () {
+			var milesMax = $(this).val();
+			//Si null on ne fait rien
+			if (milesMax == null || milesMax == '') {
+				$(this).val('');
+				$milesMaxErrorMsg.hide();
+				return true;
+			}
+			if (!milesMax.match(intRegex)) {
+				// Affiche le message d'erreur
+				$milesMaxErrorMsg.show();
+			} else {
+				$milesMaxErrorMsg.hide();
+				var milesmin = parseInt($milesMin.val());
+				if ( milesMax < milesMin ) {
+					$milesMin.val( milesMax );
+				}
+			}
+		});
+
+		$milesMin.on('focusout',function () {
+			var milesMin = $(this).val();
+			//Si null on ne fait rien
+			if (milesMin == null || milesMin == '') {
+				$(this).val('');
+				$milesMinErrorMsg.hide();
+				return true;
+			}
+			if (!milesMin.match(intRegex)) {
+				// Affiche le message d'erreur
+				$milesMinErrorMsg.show();
+			} else {
+				$milesMinErrorMsg.hide();
+				var milesMax = parseInt($milesMax.val());
+				if ( milesMin > milesMax ) {
+					$milesMax.val(milesMin);
+				}
+			}
+		});
+		// End min max miles handling
+
+		// Handle price min max
+		var $priceMax = $("#prix_max");
+		var $priceMin = $("#prix_min");
+		var $priceMinErrorMsg = $("#prix_min_error_msg");
+		var $priceMaxErrorMsg = $("#prix_max_error_msg");
+
+		$priceMax.on('focusout',function () {
+			var priceMax = $(this).val();
+			//Si null on ne fait rien
+			if (priceMax == null || priceMax == '') {
+				$(this).val('');
+				$priceMaxErrorMsg.hide();
+				return true;
+			}
+			if (!priceMax.match(floatRegex)) {
+				// Affiche le message d'erreur
+				$priceMaxErrorMsg.show();
+			} else {
+				$priceMaxErrorMsg.hide();
+				var priceMin = parseInt($priceMin.val());
+				if ( priceMax < priceMin ) {
+					$priceMin.val( priceMax );
+				}
+			}
+		});
+
+		$priceMin.on('focusout',function () {
+			var priceMin = $(this).val();
+			//Si null on ne fait rien
+			if (priceMin == null || priceMin == '') {
+				$(this).val('');
+				$priceMinErrorMsg.hide();
+				return true;
+			}
+			if (!priceMin.match(floatRegex)) {
+				// Affiche le message d'erreur
+				$priceMinErrorMsg.show();
+			} else {
+				$priceMinErrorMsg.hide();
+				var priceMax = parseInt($priceMax.val());
+				if ( priceMin > priceMax ) {
+					$priceMax.val(priceMin);
+				}
+			}
+		});
+		// End min price miles handling
+
+
+		var $categorieComp = $("#categorie-annonce");
+		var $specificToCar = $("#specific-to-car");
+		var $marque = $("#marque");
+		var $modele = $("#modele");
+		// To share the category value
+		var categorieRef;
+
+		// Brands drop down
+		function showVehiculeBrands() {
+
+			//alert('Appel OK');
+
+			var selectedValue = $categorieComp.val();
+			var superCategory = selectedValue.split("-")[0];
+			categorieRef = selectedValue.split("-")[1];
+
+			if( superCategory == "VEHICULE" ){
+
+				$.ajax({
+					type: "POST",
+					url: "{{ path('djez_publier_annonce')}}",
+					data: { idCategorie : categorieRef, queryAction : "MARQUE" },
+					cache: false,
+					success: function(marques){
+						$marque.html(marques);
+						$specificToCar.removeClass( "do-not-display" ).addClass( "do-display" );
+					}
+				});
+
+			}else{
+				$specificToCar.removeClass( "do-display" ).addClass( "do-not-display" );
+			}
+		}
+
+		// Modeles drop down
+		function showBrandModele() {
+			var marque = $marque.val();
+			$.ajax({
+				type: "POST",
+				url: "{{ path('djez_publier_annonce')}}",
+				data: { idMarque : marque, idCategorie : categorieRef, queryAction : "MODELE" },
+				cache: false,
+				success: function(modele){
+					$modele.html(modele);
+				}
+			});
+		}
+
+		//$marque.change(showBrandModele);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="file.ext">
+		<body>
+			<trans-unit id="1">
+				<source>home_page.title</source>
+				<target>Home</target>
+			</trans-unit>
+
+			<trans-unit id="2">
+				<source>user.connexion</source>
+				<target>Log in</target>
+			</trans-unit>
+
+			<trans-unit id="3">
+				<source>user.account</source>
+				<target>My account</target>
+			</trans-unit>
+
+			<trans-unit id="4">
+				<source>user.adds</source>
+				<target>My adds</target>
+			</trans-unit>
+
+			<trans-unit id="5">
+				<source>user.mails</source>
+				<target>Mails</target>
+			</trans-unit>
+
+			<trans-unit id="6">
+				<source>user.disconnect</source>
+				<target>Log out</target>
+			</trans-unit>
+
+			<trans-unit id="7">
+				<source>user_credential.forgotten</source>
+				<target>Password forgotten?</target>
+			</trans-unit>
+
+			<trans-unit id="8">
+				<source>user_account.creation</source>
+				<target>Create an account</target>
+			</trans-unit>
+
+			<trans-unit id="9">
+				<source>navigation_bar.sell</source>
+				<target>I Sell</target>
+			</trans-unit>
+
+			<trans-unit id="10">
+				<source>navigation_bar.buy</source>
+				<target>I Buy</target>
+			</trans-unit>
+
+			<trans-unit id="11">
+				<source>navigation_bar.mission</source>
+				<target>I submit a mission</target>
+			</trans-unit>
+
+			<trans-unit id="12">
+				<source>navigation_bar.shops</source>
+				<target>Shopping</target>
+			</trans-unit>
+
+			<trans-unit id="13">
+				<source>navigation_bar.help</source>
+				<target>Help</target>
+			</trans-unit>
+
+			<trans-unit id="14">
+				<source>quick_search.category</source>
+				<target>Categorie</target>
+			</trans-unit>
+
+			<trans-unit id="15">
+				<source>quick_search.min_price</source>
+				<target>Prix min</target>
+			</trans-unit>
+
+			<trans-unit id="16">
+				<source>quick_search.max_price</source>
+				<target>Prix max</target>
+			</trans-unit>
+
+			<trans-unit id="17">
+				<source>quick_search.search_button</source>
+				<target>Recherche</target>
+			</trans-unit>
+
+			<trans-unit id="18">
+				<source>home_page.caption</source>
+				<target>Annonces du jour</target>
+			</trans-unit>
+
+			<trans-unit id="19">
+				<source>home_page.add.title</source>
+				<target>Titre</target>
+			</trans-unit>
+			
+			<trans-unit id="20">
+				<source>home_page.add.price</source>
+				<target>Prix</target>
+			</trans-unit>
+			
+			<trans-unit id="21">
+				<source>home_page.contact</source>
+				<target>Contact</target>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

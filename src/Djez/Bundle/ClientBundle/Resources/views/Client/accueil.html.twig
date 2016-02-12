@@ -1,0 +1,64 @@
+{% extends '::djez.base.html.twig' %}
+
+{% block title %}
+	{% trans %}home_page.title{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container titre-rubrique light-gray">
+		{% trans %} home_page.caption {% endtrans %} {{ "now"|date("Y-m-d") }}
+	</div>
+
+	<div class="container light-gray">
+		<div class="main-wrapper">
+
+			{{ include('DjezClientBundle:Partial:searchresults.html.twig', {'annonces': annonces, 'pagination': pagination, 'selectedTab':selectedTab}) }}
+
+		{% if pagination.pages_count > 0 %}
+
+			<div id="pagination-container">
+
+				<div class="pagination pagination-hover-color">
+					<ul>
+						{% if pagination.page > 1 %}
+							<li class="previous"><a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}" class="fui-arrow-left"></a></li>
+						{% endif %}
+
+						{% for p in range(max(pagination.page-pagination.page_per_block, 1), min(pagination.page+pagination.page_per_block, pagination.pages_count)) %}
+							<li {% if p == pagination.page %} class="active" {% endif %}><a href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a></li>
+						{% endfor %}
+
+						{% if pagination.page < pagination.pages_count %}
+							<li class="next"><a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}" class="fui-arrow-right"></a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+
+		{% endif %}
+
+			<div class="push"></div>
+
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block customscripts %}
+
+	<script src="{{ asset('Flat-UI-master/js/vendor/video.js') }}"></script>
+
+	<script type="text/javascript">
+
+		$inputAnnonceId = $('#annonceId');
+		$formulaire = $('#details-form');
+		function annonceDetails(annonceId){
+			$inputAnnonceId.val(annonceId);
+			$formulaire.submit();
+		}
+
+	</script>
+
+{% endblock %}

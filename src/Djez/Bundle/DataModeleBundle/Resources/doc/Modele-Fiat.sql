@@ -1,0 +1,14 @@
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500c');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500l');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500l Living');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'500x');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Doblo');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Doblo Panorama');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Ducato Combi');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Ducato Panorama');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Freemont');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Panda');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Punto');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Qubo');;
+insert into Modeles(idMarque, dateCreation, dateModification, libelleModele) values(18,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Sedici');;
