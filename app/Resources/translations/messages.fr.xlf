@@ -538,6 +538,16 @@
 				<target>Localisation</target>
 			</trans-unit>
 
+			<trans-unit id="107">
+				<source>custom_alert.information</source>
+				<target>Information</target>
+			</trans-unit>
+
+			<trans-unit id="108">
+				<source>custom_alert.error</source>
+				<target>Erreur</target>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

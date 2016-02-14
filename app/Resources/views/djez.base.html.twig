@@ -123,6 +123,15 @@
 
 {% endblock %}
 
+<!-- Custom dialogbox -->
+<div id="dialogoverlay"></div>
+<div id="dialogbox">
+  <div>
+    <div id="dialogboxhead"></div>
+    <div id="dialogboxbody"></div>
+    <div id="dialogboxfoot"></div>
+  </div>
+</div>
 
 {% block body %}
 
@@ -153,10 +162,6 @@
 	<script src="{{ asset('alertify/lib/alertify.min.js') }}"></script>
 	<script src="{{ asset('Flat-UI-master/js/flat-ui.min.js') }}"></script>
 	<script src="{{ asset('Flat-UI-master/js/application.js') }}"></script>
-
- 	{% block customscripts %}
-
-	{% endblock %}
 
  	<script type="text/javascript">
 
@@ -204,8 +209,46 @@
 
 		});
 
+		/* Custom alert box */
+		function CustomAlert(){
+		    this.render = function(header, body){
+		        var winW = window.innerWidth;
+		        var winH = window.innerHeight;
+						var left = (winW/2) - (550 * .5);
+		        var dialogoverlay = $('#dialogoverlay');
+		        var dialogbox = $('#dialogbox');
+		        dialogoverlay.css("display", "block");
+		        dialogoverlay.css("height", winH+"px");
+		        dialogbox.css("left", left+"px");
+		        dialogbox.css("top", "100px");
+		        dialogbox.css("display", "block");
+		        var headerContainer = $('#dialogboxhead');
+						if (header == "Erreur") {
+							headerContainer.css("background", "#C70039");
+						}else {
+							headerContainer.css("background", "#2980b9");
+						}
+						headerContainer.html(header);
+		        $('#dialogboxbody').html(body);
+		        var footerContainer = $('#dialogboxfoot');
+						if (header == "Erreur") {
+							footerContainer.css("background", "#C70039");
+						}else {
+							footerContainer.css("background", "#2980b9");
+						}
+						footerContainer.html('<button onclick="Alert.ok()">OK</button>');
+		    }
+			this.ok = function(){
+				$('#dialogbox').css("display", "none");
+				$('#dialogoverlay').css("display", "none");
+			}
+		}
 
 	</script>
+
+	{% block customscripts %}
+
+	{% endblock %}
 
 </body>
 </html>

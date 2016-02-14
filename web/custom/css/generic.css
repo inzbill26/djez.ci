@@ -1639,3 +1639,25 @@ a.kbutton, a.kbutton:visited, a.kbutton:hover {
 		width:20px;
 		margin-right:5px;
 	}
+/*  Dialog box  */
+	#dialogoverlay{
+	display: none;
+	opacity: .8;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #FFF;
+	width: 100%;
+	z-index: 10;
+}
+#dialogbox{
+	display: none;
+	position: fixed;
+	border-radius:7px;
+	width:550px;
+	z-index: 10;
+}
+#dialogbox > div{ background:#FFF; margin:8px; }
+#dialogbox > div > #dialogboxhead{ font-size:19px; padding:10px; color:#CCC; }
+#dialogbox > div > #dialogboxbody{ background:#cacfd2; padding:20px; color:#FFF; text-align: center;}
+#dialogbox > div > #dialogboxfoot{ background: #2980b9; padding:10px; text-align:center; }

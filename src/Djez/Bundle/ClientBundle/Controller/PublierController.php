@@ -62,6 +62,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 						'prices' => $prices,
 						'devise' => $devise,
 						'selectedTab' => $selectedTab,
+						'processingMsgType' => null,
 						'processingMsg' => null,
 						'places' => $localisation
 						));
@@ -160,6 +161,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 					$translatorService = $this->get('translator');
 
 					if (empty($_POST)) {
+						$messageType = $translatorService->trans("custom_alert.error");
 						$message = $translatorService->trans('error.empty_form');
 						$logger->error('No data received from client side $_POST is empty');
 					}else{
@@ -178,13 +180,15 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 								  !isset($_POST['description']) || strlen(trim($_POST['description'])) == 0 ||
 									!isset($_POST['prix']) || strlen(trim($_POST['prix'])) == 0 ||
 									!isset($_POST['devise-annonce']) || strlen(trim($_POST['devise-annonce'])) == 0 ||
-									!isset($_POST['categorie']) || strlen(trim($_POST['categorie'])) == 0) {
-								$message = $translatorService->trans('error.champs_generique_requis');
-								// Lever une exception pour arreter le processing et supprimer les fichiers déjà chargé
-								$logger.debug('At least one of the following fields is not set : titre, description, prix, devise-annonce, categorie');
-								$logger.debug('Stopping request processing');
-								throw new Exception("Invalide data : titre, description, prix, devise-annonce, categorie", 1);
-							}
+									!isset($_POST['categorie']) || strlen(trim($_POST['categorie'])) == 0)
+									{
+										$messageType = $translatorService->trans("custom_alert.error");
+										$message = $translatorService->trans('error.champs_generique_requis');
+										// Lever une exception pour arreter le processing et supprimer les fichiers déjà chargé
+										$logger.debug('At least one of the following fields is not set : titre, description, prix, devise-annonce, categorie');
+										$logger.debug('Stopping request processing');
+										throw new Exception("Invalide data : titre, description, prix, devise-annonce, categorie", 1);
+									}
 							list($libelleSuperCategorie, $idCategorie) = split('-', $_POST['categorie']);
 							if ($libelleSuperCategorie == 'VEHICULE' &&
 								 (!isset($_POST['marque']) || strlen(trim($_POST['marque'])) == 0 ||
@@ -193,7 +197,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 									!isset($_POST['transmission']) || strlen(trim($_POST['transmission'])) == 0 ||
 									!isset($_POST['puissance']) || strlen(trim($_POST['puissance'])) == 0 ||
 									!isset($_POST['carburant']) || strlen(trim($_POST['carburant'])) == 0
-								 )) {
+								 ))
+								 {
+									 $messageType = $translatorService->trans("custom_alert.error");
 									 $message = $translatorService->trans('error.champs_vehicule_requis');
 									 // Lever une exception pour arreter le processing et supprimer les fichiers déjà chargé
 									 $logger.debug('At least one of the following fields is not set : marque, modele, annee, transmission, puissance, carburant');
@@ -202,7 +208,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 								 }
 							if (!isset($_POST['typeAnnonceur']) || strlen(trim($_POST['typeAnnonceur'])) == 0 ||
 	 								!isset($_POST['email']) || strlen(trim($_POST['email'])) == 0
-								 ){
+								 )
+								 {
+									 $messageType = $translatorService->trans("custom_alert.error");
 									 $message = $translatorService->trans('error.champs_annonceur_requis');
 									 // Lever une exception pour arreter le processing et supprimer les fichiers déjà chargé
 									 $logger.debug('At least one of the following fields is not set : typeAnnonceur, email');
@@ -299,6 +307,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 							// 2. Recuperation des photos
 							// Recuperation de la photo d'accroche
+							$accroche = "";
 							if (isset($_POST['accroche'])) {
 								$accroche = addcslashes($_POST['accroche'],"%_");
 							}
@@ -375,11 +384,13 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 					$em->persist($annonce);
 					$em->flush();
 					$logger->debug('Add have been persisted successfully!');
+					$messageType = $translatorService->trans("custom_alert.information");
 					$message = $translatorService->trans('add.save_success');
 				} catch (Exception $e)
 				{
 					$logger->error($e->getMessage());
 					// Get the error message from transcription file
+					$messageType = $translatorService->trans("custom_alert.error");
 					$message = $e->getMessage();
 				}
 			}
@@ -401,6 +412,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 				'prices' => $prices,
 				'devise' => $devise,
 				'selectedTab' => $selectedTab,
+				'processingMsgType' => $messageType,
 				'processingMsg' => $message,
 				'places' => $localisation
 				));

@@ -8,7 +8,7 @@ function horizontal_menu(element) {
 				removeClass(menuElement[i], 'selected-menu-element');
 				break;
 			}
-			
+
 		}
 		addClass(element.parentNode, 'selected-menu-element');
 }

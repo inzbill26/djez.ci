@@ -287,11 +287,13 @@
 
 <script type="text/javascript">
 				// Gestion de l'affichage des erreurs de sauvegarde
-				{% if processingMsg != null %}
-						$( document ).ready(function() {
-							alert('{{processingMsg}}');
-						});
-				{% endif %}
+		{% if processingMsg != null %}
+				var Alert = new CustomAlert();
+				$( document ).ready(function() {
+					var Alert = new CustomAlert();
+					Alert.render('{{processingMsgType}}' , '{{processingMsg}}');
+				});
+	  {% endif %}
 	    	//var $categorieComp = $("select[name='categorie']");
 	    	var $categorieComp = $("#categorie-annonce");
 	    	var $specificToCar = $("#specific-to-car");
